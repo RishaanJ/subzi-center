@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: rgb(222, 221, 221);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,6 +13,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.logo{
+  width: 450px;
+}
 a {
   font-weight: 500;
   color: #646cff;
@@ -65,4 +68,71 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+
+/* General form styling */
+form {
+  width: 600px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border: none;
+}
+form input{
+  background-color: #f9f9f9;
+  color: black;
+}
+/* Header styling */
+h3 {
+  text-align: left;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+}
+
+/* Form group styling */
+.mb-3 {
+  margin-bottom: 15px;
+}
+
+/* Label styling */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+}
+
+/* Input styling */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Button styling */
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition-duration: .5s;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
 }

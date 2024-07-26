@@ -5,12 +5,12 @@ import { getFirestore } from "firebase/firestore"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "X",
-  authDomain: "X",
-  projectId: "X",
-  storageBucket: "X",
-  messagingSenderId: "X",
-  appId: "X"
+  apiKey: “X”,
+  authDomain: “X”,
+  projectId: “X”,
+  storageBucket: “X”,
+  messagingSenderId: “X”,
+  appId: “X”,
 };
 
 // Initialize Firebase

@@ -4,6 +4,8 @@ import { auth, db } from "./firebase"; // Adjust import paths if needed
 import { setDoc, doc } from "firebase/firestore";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import myImage from '../assets/text.png';
+import { Link } from 'react-router-dom';
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -21,7 +23,7 @@ function Register() {
         await setDoc(doc(db, "Users", user.uid), {
           email: user.email,
           firstName: fname,
-          lastName: lname,
+          username: lname,
         });
         toast.success("Welcome to Subzi Center!", {
           position: "top-center",
@@ -37,8 +39,19 @@ function Register() {
 
   return (
     <>
+      <img className="logo" src={myImage} alt="Logo" />
       <form onSubmit={handleRegister}>
         <h3>Signup</h3>
+        <div className="mb-3">
+          <label>Username</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Username"
+            onChange={(e) => setLname(e.target.value)}
+            required
+          />
+        </div>
         <div className="mb-3">
           <label>First Name</label>
           <input
@@ -46,16 +59,6 @@ function Register() {
             className="form-control"
             placeholder="First Name"
             onChange={(e) => setFname(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label>Last Name</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Last Name"
-            onChange={(e) => setLname(e.target.value)}
             required
           />
         </div>
@@ -85,6 +88,9 @@ function Register() {
           </button>
         </div>
       </form>
+      <p className="text-center mt-3">
+        Already have an account? <Link to="/login">Login here</Link>
+      </p>
       <ToastContainer />
     </>
   );
