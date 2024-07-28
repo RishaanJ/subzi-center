@@ -12,66 +12,16 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.big-container{
+  display: flex;
+  flex-direction: column;
+}
 .logo{
   width: 450px;
-}
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  margin: auto;
+  text-align: center;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-
-/* General form styling */
 form {
   width: 600px;
   margin: auto;
@@ -80,6 +30,7 @@ form {
   background-color: #f9f9f9;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border: none;
+  margin-top: 80px;
 }
 form input{
   background-color: #f9f9f9;
@@ -135,4 +86,90 @@ label {
 .btn-primary:hover {
   background-color: #0056b3;
   transform: scale(1.1);
+}
+
+.forgot-password{
+  text-align: center;
+  color: black;
+}
+.forgot-password a{
+  color: blue;
+}
+
+
+/* main page */
+
+.flexbox-top{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flexbox-column{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+.flexbox-column{
+  margin-right: 20px;
+}
+
+
+
+.flexbox-top img{
+  margin: 0
+}
+
+form{
+  text-align: center;
+  color: black;
+}
+
+form a{
+  color: blue;
+}
+
+.containing{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.containing img{
+  margin-top: 15px;
+}
+
+
+.subzi-big-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.subzi-small-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.subzi{
+  margin-right: 20px;
+  width: 300px;
+  height: 400px;
+  background-color: white;
+  color: black;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+
+.subzi img{
+  width: 60%;
 }

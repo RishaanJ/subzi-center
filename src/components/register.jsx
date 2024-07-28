@@ -10,8 +10,7 @@ import { Link } from 'react-router-dom';
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
+  const [uname, setUname] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -22,8 +21,7 @@ function Register() {
       if (user) {
         await setDoc(doc(db, "Users", user.uid), {
           email: user.email,
-          firstName: fname,
-          username: lname,
+          username: uname,
         });
         toast.success("Welcome to Subzi Center!", {
           position: "top-center",
@@ -39,58 +37,50 @@ function Register() {
 
   return (
     <>
-      <img className="logo" src={myImage} alt="Logo" />
-      <form onSubmit={handleRegister}>
-        <h3>Signup</h3>
-        <div className="mb-3">
-          <label>Username</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Username"
-            onChange={(e) => setLname(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label>First Name</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="First Name"
-            onChange={(e) => setFname(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label>Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            placeholder="Enter email"
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Enter password"
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
-            Sign Up
-          </button>
-        </div>
-      </form>
-      <p className="text-center mt-3">
-        Already have an account? <Link to="/login">Login here</Link>
-      </p>
+      <div className="containing">
+        <img className="logo" src={myImage} alt="Logo" />
+        <form onSubmit={handleRegister}>
+          <h3>Signup</h3>
+          <div className="mb-3">
+            <label>Username</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Username"
+              onChange={(e) => setUname(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label>Email address</label>
+            <input
+              type="email"
+              className="form-control"
+              placeholder="Enter email"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Enter password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="d-grid">
+            <button type="submit" className="btn btn-primary">
+              Sign Up
+            </button>
+          </div>
+          <p className="text-center mt-3">
+          Already have an account? <Link to="/login">Login here</Link>
+          </p>
+        </form>
+      </div>
       <ToastContainer />
     </>
   );

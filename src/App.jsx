@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './components/login';
-import Register from './components/register';
-import Profile from './components/profile';
+import Login from './components/login.jsx';
+import Register from './components/register.jsx';
+import Profile from './components/profile.jsx'
+// Import other components
 
 function App() {
   return (

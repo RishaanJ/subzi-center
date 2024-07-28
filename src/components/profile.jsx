@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { auth, db } from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
+import myImage from '../assets/text.png';
 
 function Profile() {
   const [userDetails, setUserDetails] = useState(null);
@@ -35,22 +36,41 @@ function Profile() {
     <div>
       {userDetails ? (
         <>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <img
-              src={userDetails.photo}
-              width={"40%"}
-              style={{ borderRadius: "50%" }}
-            />
+          <div className="flexbox-top">
+            <img src={myImage} className="logo"/>
+            <div className="flexbox-column">
+                <h3>Hey, {userDetails.username}!</h3>
+                <button className="btn btn-primary" onClick={handleLogout}>
+                Logout</button>
+            </div>
+            
           </div>
-          <h3>Welcome {userDetails.firstName} 🙏🙏</h3>
-          <div>
-            <p>Email: {userDetails.email}</p>
-            <p>First Name: {userDetails.firstName}</p>
-            {/* <p>Last Name: {userDetails.lastName}</p> */}
+          <div className="subzi-big-container">
+            <div className="subzi-of-the-day">
+                <img className="subzi-otd"/>
+                <h1>Subzi of the Day</h1>
+            </div>
+            <div className="subzi-small-container">
+
+                <div className="subzi">
+                    <img/>
+                    <h1>Subzi Name</h1>
+                </div>
+                <div className="subzi">
+                    <img src="https://www.vegrecipesofindia.com/wp-content/uploads/2014/09/patta-gobi-matar-recipe-1.jpg"/>
+                    <h1>Patha Gobi</h1>
+                </div>
+                <div className="subzi">
+                    <img/>
+                    <h1>Subzi Name</h1>
+                </div>
+                <div className="subzi">
+                    <img/>
+                    <h1>Subzi Name</h1>
+                </div>
+            </div>
           </div>
-          <button className="btn btn-primary" onClick={handleLogout}>
-            Logout
-          </button>
+
         </>
       ) : (
         <p>Loading...</p>
