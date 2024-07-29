@@ -47,26 +47,30 @@ function Profile() {
           </div>
           <div className="subzi-big-container">
             <div className="subzi-of-the-day">
-                <img className="subzi-otd"/>
-                <h1>Subzi of the Day</h1>
+                <img src="https://www.spiceupthecurry.com/wp-content/uploads/2020/11/achari-bhindi-2.jpg" className="subzi-otd"/>
+                <h1>Subzi <br/> of <br/> the <br/> Day</h1>
             </div>
             <div className="subzi-small-container">
 
                 <div className="subzi">
-                    <img/>
-                    <h1>Subzi Name</h1>
+                    <img src="https://www.spiceupthecurry.com/wp-content/uploads/2022/05/lauki-sabzi-2.jpg"/>
+                    <h1>Lauki ki Sabzi</h1>
+                    <h1>★★★★★</h1>
                 </div>
                 <div className="subzi">
                     <img src="https://www.vegrecipesofindia.com/wp-content/uploads/2014/09/patta-gobi-matar-recipe-1.jpg"/>
                     <h1>Patha Gobi</h1>
+                    <h1>★★★★★</h1>
                 </div>
                 <div className="subzi">
-                    <img/>
-                    <h1>Subzi Name</h1>
+                    <img src="https://www.spiceupthecurry.com/wp-content/uploads/2022/05/Palak-sabzi-2.jpg"/>
+                    <h1>Palak Sabzi with Aloo</h1>
+                    <h1>★★★★★</h1>
                 </div>
                 <div className="subzi">
-                    <img/>
-                    <h1>Subzi Name</h1>
+                    <img src="https://www.spiceupthecurry.com/wp-content/uploads/2022/05/aloo-capsicum-1.jpg"/>
+                    <h1>Aloo Shimla Mirch</h1>
+                    <h1>★★★★★</h1>
                 </div>
             </div>
           </div>

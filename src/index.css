@@ -167,9 +167,52 @@ form a{
   justify-content: center;
   flex-direction: column;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin-top: 30px;
+  transition-duration: .5s;
+  cursor: pointer;
+  text-align: center;
+  font-size: 10px;
 
 }
 
+.subzi:hover{
+  transform: scale(1.1);
+}
+
 .subzi img{
-  width: 60%;
+  width: 250px;
+  height: 200px;
+  object-fit: cover;
+
+}
+
+
+.subzi-of-the-day{
+  width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-color: white;
+  border-radius: 25px;
+  height: 400px;
+  text-align: center;
+  font-size: 30px;
+  transition-duration: .2s;
+  cursor: pointer
+}
+
+.subzi-of-the-day:hover{
+  transform: scale(1.1);
+}
+
+.subzi-of-the-day img{
+  height: 390px;
+  width: 50%;
+  border-radius: 20px;
+  object-fit: cover;
+  margin-right: 200px;
+
 }
