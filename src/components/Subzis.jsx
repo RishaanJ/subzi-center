@@ -13,11 +13,10 @@ const Subzis = () => {
   const [avg, setAvg] = useState(null);
   const [review_s, setReview_s] = useState([]);
   const [review_i, setReview_i] = useState([]);
-  const [int, setInt] = useState("");
+  const [int, setInt] = useState(5); // Initialize with 5
   const [string, setString] = useState("");
 
-  const average = array => array.reduce((a, b) => a + b) / array.length;
-
+  const average = array => array.length ? array.reduce((a, b) => a + b) / array.length : 0;
   const starNotation = number => {
     let fill = "★";
     let unfill = "☆";
@@ -68,34 +67,45 @@ const Subzis = () => {
     e.preventDefault();
     console.log("Rating:", int);
     console.log("Review:", string);
-    setString(int)
-    setInt(string)
     const currentDoc = await getDoc(doc(db, "Subzi", subziId));
     const currentData = currentDoc.data();
-    const updatedInts = [...(currentData.Ints || []), parseInt(int, 10)];
-    try{
-        await updateDoc(doc(db, "Subzi", subziId), {
-            Strings: arrayUnion(string),
-            Ints: updatedInts,
-        });
-        toast.success("You have left a review!", {
-            position: "top-center",
-        });
+    const updatedInts = [...(currentData.Ints || []), int];
+    try {
+      await updateDoc(doc(db, "Subzi", subziId), {
+        Strings: arrayUnion(string),
+        Ints: updatedInts,
+      });
+      toast.success("You have left a review!", {
+        position: "top-center",
+      });
 
-        setInt("");
-        setString("");
+      setInt(5);
+      setString("");
+      window.location.reload();
 
-    } catch (eror){
-        toast.error(eror, {position: "top-center",});
+    } catch (error) {
+      toast.error(error, { position: "top-center" });
     }
-
-
   };
 
   useEffect(() => {
     fetchUserData();
-    findSubzi(); // Fetch the subzi data when the component mounts
+    findSubzi();
+    updateRating(5); // Fetch the subzi data when the component mounts
   }, [subziId]); // Depend on subziId to re-fetch if it changes
+
+  // Function to update rating
+  const updateRating = (n) => {
+    setInt(n);
+    const stars = document.getElementsByClassName("star");
+    if (stars.length === 5) { // Ensure that there are 5 star elements
+      for (let i = 0; i < 5; i++) {
+        stars[i].className = "star " + (i < n ? "selected" : ""); // Add 'selected' class to filled stars
+        stars[i].innerText = i < n ? '★' : '☆'; // Change star character based on rating
+      }
+      document.getElementById("output").innerText = "Rating is: " + n + "/5";
+    }
+  };
 
   return (
     <div>
@@ -111,7 +121,15 @@ const Subzis = () => {
               <h1>Leave a review!</h1>
               <form onSubmit={handleFormSubmit}>
                 <label>Star rating</label>
-                <input type="number" value={int} onChange={(e) => setInt(Number(e.target.value))} />
+                <div className="card">
+                  <br />
+                  <span onClick={() => updateRating(1)} className="star">★</span>
+                  <span onClick={() => updateRating(2)} className="star">★</span>
+                  <span onClick={() => updateRating(3)} className="star">★</span>
+                  <span onClick={() => updateRating(4)} className="star">★</span>
+                  <span onClick={() => updateRating(5)} className="star">★</span>
+                  <h3 id="output">Rating is: 5/5</h3> {/* Initialize with 5 */}
+                </div>
                 <label>Review</label>
                 <input type="text" value={string} onChange={(e) => setString(e.target.value)} />
                 <button className="pushable" type="submit"><span className="front">Submit</span></button>
@@ -119,15 +137,16 @@ const Subzis = () => {
             </div>
           </div>
           <div className="Reviews">
-            {review_s.map((item, index) => (
+            <h1 className="reviewsectiontitle">Reviews</h1>
+            {review_s.slice().reverse().map((item, index) => (
               <h1 key={index} className="review">{item}</h1>
             ))}
           </div>
-          <ToastContainer/>
+          <ToastContainer />
         </div>
       ) : (
         <div>
-          <h1>YOu aint logged in cuh?</h1>
+          <h1>You aren't logged in.</h1>
         </div>
       )}
     </div>

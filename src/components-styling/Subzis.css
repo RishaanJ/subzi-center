@@ -94,3 +94,14 @@
   .pushable:active .front {
     transform: translateY(-2px);
   }
+
+  
+.star{
+    font-size: 55px;
+    cursor: pointer;
+}
+
+.reviewsectiontitle{
+    font-size: 60px;
+    color: black;
+}
