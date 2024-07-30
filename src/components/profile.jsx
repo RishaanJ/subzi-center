@@ -1,27 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { auth, db } from "./firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs } from "firebase/firestore";
+import Tile from "./Tile";
 import myImage from '../assets/text.png';
 
 function Profile() {
   const [userDetails, setUserDetails] = useState(null);
+  const [subziItems, setSubziItems] = useState([]);
+
   const fetchUserData = async () => {
     auth.onAuthStateChanged(async (user) => {
-      console.log(user);
-
-      const docRef = doc(db, "Users", user.uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setUserDetails(docSnap.data());
-        console.log(docSnap.data());
-      } else {
-        console.log("User is not logged in");
+      if (user) {
+        const docRef = doc(db, "Users", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setUserDetails(docSnap.data());
+        } else {
+          console.log("User is not logged in");
+        }
       }
     });
   };
+
+  const fetchSubziItems = async () => {
+    const subziCollection = collection(db, "Subzi");
+    const subziSnapshot = await getDocs(subziCollection);
+    const subziList = subziSnapshot.docs.map(doc => doc.data());
+    setSubziItems(subziList);
+  };
+
   useEffect(() => {
     fetchUserData();
+    fetchSubziItems();
   }, []);
+
+  const randomDegree = () => {
+    const degree = Math.floor(Math.random() * 10) - 5;
+    return {
+      transform: `rotate(${degree}deg)`
+    };
+  };
+
 
   async function handleLogout() {
     try {
@@ -32,6 +51,8 @@ function Profile() {
       console.error("Error logging out:", error.message);
     }
   }
+
+
   return (
     <div>
       {userDetails ? (
@@ -43,7 +64,6 @@ function Profile() {
                 <button className="btn btn-primary" onClick={handleLogout}>
                 Logout</button>
             </div>
-            
           </div>
           <div className="subzi-big-container">
             <div className="subzi-of-the-day">
@@ -51,30 +71,11 @@ function Profile() {
                 <h1>Subzi <br/> of <br/> the <br/> Day</h1>
             </div>
             <div className="subzi-small-container">
-
-                <div className="subzi">
-                    <img src="https://www.spiceupthecurry.com/wp-content/uploads/2022/05/lauki-sabzi-2.jpg"/>
-                    <h1>Lauki ki Sabzi</h1>
-                    <h1>★★★★★</h1>
-                </div>
-                <div className="subzi">
-                    <img src="https://www.vegrecipesofindia.com/wp-content/uploads/2014/09/patta-gobi-matar-recipe-1.jpg"/>
-                    <h1>Patha Gobi</h1>
-                    <h1>★★★★★</h1>
-                </div>
-                <div className="subzi">
-                    <img src="https://www.spiceupthecurry.com/wp-content/uploads/2022/05/Palak-sabzi-2.jpg"/>
-                    <h1>Palak Sabzi with Aloo</h1>
-                    <h1>★★★★★</h1>
-                </div>
-                <div className="subzi">
-                    <img src="https://www.spiceupthecurry.com/wp-content/uploads/2022/05/aloo-capsicum-1.jpg"/>
-                    <h1>Aloo Shimla Mirch</h1>
-                    <h1>★★★★★</h1>
-                </div>
+              {subziItems.map((item, index) => (
+                <Tile s={randomDegree()} key={index} imageSrc={item.Image} name={item.Title} />
+              ))}
             </div>
           </div>
-
         </>
       ) : (
         <p>Loading...</p>
@@ -82,4 +83,5 @@ function Profile() {
     </div>
   );
 }
+
 export default Profile;

@@ -153,10 +153,13 @@ form a{
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  margin-top: 40px;
 }
 
 .subzi{
-  margin-right: 20px;
+  flex: 0 0 21%;
+  margin-right: 45px;
   width: 300px;
   height: 400px;
   background-color: white;
@@ -168,7 +171,7 @@ form a{
   flex-direction: column;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   margin-top: 30px;
-  transition-duration: .5s;
+  transition-duration: .2s;
   cursor: pointer;
   text-align: center;
   font-size: 10px;
@@ -176,7 +179,7 @@ form a{
 }
 
 .subzi:hover{
-  transform: scale(1.1);
+  transform: scale(1.1) rotate(0deg) !important;
 }
 
 .subzi img{
@@ -209,7 +212,7 @@ form a{
 }
 
 .subzi-of-the-day img{
-  height: 390px;
+  height: 350px;
   width: 50%;
   border-radius: 20px;
   object-fit: cover;
