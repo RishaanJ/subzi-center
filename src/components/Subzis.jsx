@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { auth, db } from "./firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import '../components-styling/Subzis.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Subzis = () => {
   const { subziId } = useParams();
@@ -63,13 +64,31 @@ const Subzis = () => {
     }
   };
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
     console.log("Rating:", int);
     console.log("Review:", string);
-    // Save to useStates
-    setReview_i([...review_i, int]);
-    setReview_s([...review_s, string]);
+    setString(int)
+    setInt(string)
+
+    try{
+        await updateDoc(doc(db, "Subzi", subziId), {
+            Strings: arrayUnion(string),
+            Ints: arrayUnion(int),
+        });
+        toast.success("You have left a review!", {
+            position: "top-center",
+        });
+
+        setInt("");
+        setString("");
+
+        findSubzi()
+    } catch (eror){
+        toast.error(eror, {position: "top-center",});
+    }
+
+
   };
 
   useEffect(() => {
