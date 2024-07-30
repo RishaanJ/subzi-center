@@ -56,6 +56,7 @@ const Subzis = () => {
           setAvg(Math.floor(average(subziData.Ints)));
         } else {
           console.log("Subzi not found");
+          window.location.href = "/404"
         }
       }
     } catch (error) {

@@ -1,3 +1,5 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Orbitron:wght@400..900&display=swap');
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -219,4 +221,21 @@ form a{
   object-fit: cover;
   margin-right: 200px;
 
+}
+
+.four-page{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-family: "Orbitron", sans-serif;
+  font-size: 150px;
+}
+
+.shiz{
+  font-size: 100px;
+  text-align: center;
+  color: black;
+  margin-top: 0px;
 }
