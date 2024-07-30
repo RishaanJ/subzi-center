@@ -4,7 +4,7 @@ import { auth, db } from "./firebase";
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import '../components-styling/Subzis.css';
 import { ToastContainer, toast } from 'react-toastify';
-
+import myImage from '../assets/text.png';
 const Subzis = () => {
   const { subziId } = useParams();
   const [userDetails, setUserDetails] = useState(null);
@@ -88,6 +88,16 @@ const Subzis = () => {
     }
   };
 
+  async function handleLogout() {
+    try {
+      await auth.signOut();
+      window.location.href = "/login";
+      console.log("User logged out successfully!");
+    } catch (error) {
+      console.error("Error logging out:", error.message);
+    }
+  }
+
   useEffect(() => {
     fetchUserData();
     findSubzi();
@@ -111,6 +121,14 @@ const Subzis = () => {
     <div>
       {userDetails ? (
         <div>
+            <div className="flexbox-top">
+                <img src={myImage} onClick={() => window.location.href = "/profile"}className="logo"/>
+                <div className="flexbox-column">
+                    <h3>Hey, {userDetails.username}!</h3>
+                    <button className="btn btn-primary" onClick={handleLogout}>
+                    Logout</button>
+                </div>
+            </div>
           <div className="Subzi-Container-Info">
             <div className="Subzi-Info">
               {image && <img src={image} alt={title} />}
@@ -119,7 +137,7 @@ const Subzis = () => {
             </div>
             <div className="leaveAReview">
               <h1>Leave a review!</h1>
-              <form onSubmit={handleFormSubmit}>
+              <form onSubmit={handleFormSubmit} className="reviw-form">
                 <label>Star rating</label>
                 <div className="card">
                   <br />
