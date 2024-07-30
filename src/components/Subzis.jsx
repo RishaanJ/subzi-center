@@ -71,10 +71,23 @@ const Subzis = () => {
     <div>
       {userDetails ? (
         <div>
-            <div className="Subzi-Info">
-                {image && <img src={image} alt={title} />}
-                {title && <h2>{title}</h2>}
-                <h3 className="stars">{starNotation(avg)}</h3>
+            <div className="Subzi-Container-Info">
+                <div className="Subzi-Info">
+                    {image && <img src={image} alt={title} />}
+                    {title && <h2>{title}</h2>}
+                    <h3 className="stars">{starNotation(avg)}</h3>
+                </div>
+                <div className="leaveAReview">
+                    <h1>Leave a review!</h1>
+                    <form>
+                        <label>Star rating</label>
+                        <h1>★★★★★</h1>
+                        <label>Review</label>
+                        <input type="text"></input>
+                        <button className="pushable"><span className="front">Submit</span></button>
+                    </form>
+
+                </div>
             </div>
             <div className="Reviews">
                 {review_s.map((item, index) => (

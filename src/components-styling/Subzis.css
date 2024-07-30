@@ -1,4 +1,8 @@
-
+.Subzi-Container-Info{
+    display: flex;
+    flex-direction: row;
+    color: black;
+}
 
 .Subzi-Info{
     width: 50%;
@@ -12,7 +16,7 @@
 
 .Subzi-Info img{
     width: 75%;
-    height: 650px;
+    height: 350px;
     object-fit: cover;
     border-radius: 25px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -37,3 +41,56 @@
     border-radius: 20px;
     text-align: center;
 }
+
+.rating {
+    display: flex;
+    direction: row;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.rating input {
+    display: none;
+}
+.rating label {
+    color: gray;
+    margin: 0;
+    cursor: pointer;
+}
+.rating input:checked ~ label {
+    color: gold;
+}
+.rating input:checked ~ label:hover,
+.rating input:checked ~ label:hover ~ label {
+    color: gold;
+}
+.rating label:hover,
+.rating label:hover ~ label {
+    color: gold;
+}
+
+
+
+
+.pushable {
+    background: hsl(213, 52%, 35%);
+    border-radius: 12px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    width: 200px;
+    margin: auto;
+    margin-top: 15px;
+  }
+  .front {
+    display: block;
+    padding: 12px 42px;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    background: hsl(213, 72%, 58%);
+    color: white;
+    transform: translateY(-6px);
+  }
+  .pushable:active .front {
+    transform: translateY(-2px);
+  }
