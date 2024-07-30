@@ -71,14 +71,21 @@ const Subzis = () => {
     <div>
       {userDetails ? (
         <div>
-          {image && <img src={image} alt={title} />}
-          {title && <h2>{title}</h2>}
-          <h3>{starNotation(avg)}</h3>
+            <div className="Subzi-Info">
+                {image && <img src={image} alt={title} />}
+                {title && <h2>{title}</h2>}
+                <h3 className="stars">{starNotation(avg)}</h3>
+            </div>
+            <div className="Reviews">
+                {review_s.map((item, index) => (
+                <h1 key={index} className="review" >{item}</h1>
+              ))}
+            </div>
+
         </div>
       ) : (
         <div>
             <h1>YOu aint logged in cuh?</h1>
-            {window.location.href="/login"}
         </div>
       )}
     </div>

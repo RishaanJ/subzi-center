@@ -52,6 +52,10 @@ function Profile() {
     }
   }
 
+  const handleTileClick = (name) => {
+    window.location.href = `/subzis/${name.toLowerCase().replace(/\s+/g, '')}`;
+  };
+
 
   return (
     <div>
@@ -72,7 +76,7 @@ function Profile() {
             </div>
             <div className="subzi-small-container">
               {subziItems.map((item, index) => (
-                <Tile s={randomDegree()} key={index} imageSrc={item.Image} name={item.Title} />
+                <Tile s={randomDegree()} key={index} imageSrc={item.Image} name={item.Title} onClick={() => handleTileClick(item.Title)} />
               ))}
             </div>
           </div>
