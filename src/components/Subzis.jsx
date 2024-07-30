@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { auth, db } from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
-import '../components-styling/Subzis.css'
+import '../components-styling/Subzis.css';
 
 const Subzis = () => {
   const { subziId } = useParams();
@@ -12,16 +12,17 @@ const Subzis = () => {
   const [avg, setAvg] = useState(null);
   const [review_s, setReview_s] = useState([]);
   const [review_i, setReview_i] = useState([]);
+  const [int, setInt] = useState("");
+  const [string, setString] = useState("");
 
   const average = array => array.reduce((a, b) => a + b) / array.length;
-  function starNotation(number){
-    let fill = "★"
-    let unfill = "☆"
 
-    let unfillStars = 5 - number
-    
-    return fill.repeat(number) + unfill.repeat(unfillStars)
-  }
+  const starNotation = number => {
+    let fill = "★";
+    let unfill = "☆";
+    let unfillStars = 5 - number;
+    return fill.repeat(number) + unfill.repeat(unfillStars);
+  };
 
   const fetchUserData = async () => {
     try {
@@ -52,7 +53,7 @@ const Subzis = () => {
           setTitle(subziData.Title || null);
           setReview_s(subziData.Strings || []);
           setReview_i(subziData.Ints || []);
-          setAvg(Math.floor(average(subziData.Ints)))
+          setAvg(Math.floor(average(subziData.Ints)));
         } else {
           console.log("Subzi not found");
         }
@@ -60,6 +61,15 @@ const Subzis = () => {
     } catch (error) {
       console.error("Error fetching subzi data:", error);
     }
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    console.log("Rating:", int);
+    console.log("Review:", string);
+    // Save to useStates
+    setReview_i([...review_i, int]);
+    setReview_s([...review_s, string]);
   };
 
   useEffect(() => {
@@ -71,34 +81,32 @@ const Subzis = () => {
     <div>
       {userDetails ? (
         <div>
-            <div className="Subzi-Container-Info">
-                <div className="Subzi-Info">
-                    {image && <img src={image} alt={title} />}
-                    {title && <h2>{title}</h2>}
-                    <h3 className="stars">{starNotation(avg)}</h3>
-                </div>
-                <div className="leaveAReview">
-                    <h1>Leave a review!</h1>
-                    <form>
-                        <label>Star rating</label>
-                        <h1>★★★★★</h1>
-                        <label>Review</label>
-                        <input type="text"></input>
-                        <button className="pushable"><span className="front">Submit</span></button>
-                    </form>
-
-                </div>
+          <div className="Subzi-Container-Info">
+            <div className="Subzi-Info">
+              {image && <img src={image} alt={title} />}
+              {title && <h2>{title}</h2>}
+              <h3 className="stars">{starNotation(avg)}</h3>
             </div>
-            <div className="Reviews">
-                {review_s.map((item, index) => (
-                <h1 key={index} className="review" >{item}</h1>
-              ))}
+            <div className="leaveAReview">
+              <h1>Leave a review!</h1>
+              <form onSubmit={handleFormSubmit}>
+                <label>Star rating</label>
+                <input type="number" value={int} onChange={(e) => setInt(Number(e.target.value))} />
+                <label>Review</label>
+                <input type="text" value={string} onChange={(e) => setString(e.target.value)} />
+                <button className="pushable" type="submit"><span className="front">Submit</span></button>
+              </form>
             </div>
-
+          </div>
+          <div className="Reviews">
+            {review_s.map((item, index) => (
+              <h1 key={index} className="review">{item}</h1>
+            ))}
+          </div>
         </div>
       ) : (
         <div>
-            <h1>YOu aint logged in cuh?</h1>
+          <h1>YOu aint logged in cuh?</h1>
         </div>
       )}
     </div>
