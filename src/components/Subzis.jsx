@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { auth, db } from "./firebase";
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import '../components-styling/Subzis.css';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Subzis = () => {
   const { subziId } = useParams();
@@ -70,11 +70,13 @@ const Subzis = () => {
     console.log("Review:", string);
     setString(int)
     setInt(string)
-
+    const currentDoc = await getDoc(doc(db, "Subzi", subziId));
+    const currentData = currentDoc.data();
+    const updatedInts = [...(currentData.Ints || []), parseInt(int, 10)];
     try{
         await updateDoc(doc(db, "Subzi", subziId), {
             Strings: arrayUnion(string),
-            Ints: arrayUnion(int),
+            Ints: updatedInts,
         });
         toast.success("You have left a review!", {
             position: "top-center",
@@ -83,7 +85,6 @@ const Subzis = () => {
         setInt("");
         setString("");
 
-        findSubzi()
     } catch (eror){
         toast.error(eror, {position: "top-center",});
     }
@@ -122,6 +123,7 @@ const Subzis = () => {
               <h1 key={index} className="review">{item}</h1>
             ))}
           </div>
+          <ToastContainer/>
         </div>
       ) : (
         <div>
