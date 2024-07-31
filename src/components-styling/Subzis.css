@@ -109,3 +109,11 @@
 .reviw-form label{
     font-size: 20px;
 }
+
+.reviw-form input{
+    padding: 10px 20px;
+    width: 400px;
+    border: 0.3px solid gray;
+    background-color: white;
+    border-radius: 5px;
+}

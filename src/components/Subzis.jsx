@@ -150,7 +150,7 @@ const Subzis = () => {
                   <h3 id="output">Rating is: 5/5</h3> {/* Initialize with 5 */}
                 </div>
                 <label>Review</label>
-                <input type="text" value={string} onChange={(e) => setString(e.target.value)} />
+                <input type="text" value={string} placeholder="Enter review"onChange={(e) => setString(e.target.value)} />
                 <button className="pushable" type="submit"><span className="front">Submit</span></button>
               </form>
             </div>

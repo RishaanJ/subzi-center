@@ -5,6 +5,7 @@ import JSConfetti from 'js-confetti';
 import './admin.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import myImage from '../assets/text.png'
 
 function Admin() {
     const [userDetails, setUserDetails] = useState(null);
@@ -27,7 +28,7 @@ function Admin() {
             toast.success("Subzi has been created!", {
                 position: "top-center",
             });
-            BanananaHammerPressed("🇮🇳")
+            BanananaHammerPressed("🇮🇳");
         } catch (error) {
             console.log(error.message);
             toast.error(error.message, {
@@ -84,21 +85,36 @@ function Admin() {
         }));
     };
 
+    async function handleLogout() {
+        try {
+          await auth.signOut();
+          window.location.href = "/login";
+          console.log("User logged out successfully!");
+        } catch (error) {
+          console.error("Error logging out:", error.message);
+        }
+      }
+
     return (
         <div>
             {userDetails && isAdmin ? (
                 <>
-                    <canvas className="confetti"></canvas>
-                    <section className="command-section">
-                        <h2>Commands</h2>
-                        <button id="ban-user" className="btn btn-3d" onClick={BanananaHammerPressed}>BanananaHammer</button>
-                        <div className="confetti-container">
-                            <div id="confetti"></div>
+                    <div className="flexbox-top">
+                        <img src={myImage} className="logo"/>
+                        <div className="flexbox-column">
+                            <h3>Hey, {userDetails.username}!</h3>
+                            <button className="btn btn-primary" onClick={handleLogout}>
+                            Logout</button>
                         </div>
+                    </div>
+                    <canvas className="confetti"></canvas>
+                    <section className="adminpanel-command-section">
+                        <h2>Commands</h2>
+                        <button id="ban-user" className="adminpanel-btn adminpanel-btn-3d" onClick={BanananaHammerPressed}>BanananaHammer</button>
                     </section>
-                    <section className="add-sabzi-section">
+                    <section className="adminpanel-add-sabzi-section">
                         <h2>Add Sabzi</h2>
-                        <form id="add-sabzi-form" onSubmit={handleSubzi}>
+                        <form id="adminpanel-add-sabzi-form" onSubmit={handleSubzi}>
                             <label htmlFor="name">Title:</label>
                             <input type="text" id="name" name="name" onChange={handleChange} required />
                             
@@ -111,7 +127,7 @@ function Admin() {
                             <label htmlFor="review_s">Strings (comma separated):</label>
                             <input type="text" id="review_s" name="review_s" onChange={handleChange} />
                             
-                            <button type="submit" className="btn btn-3d">Add Sabzi</button>
+                            <button type="submit" className="adminpanel-btn adminpanel-btn-3d">Add Sabzi</button>
                         </form>
                     </section>
                 </>

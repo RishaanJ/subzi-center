@@ -7,6 +7,7 @@ import myImage from '../assets/text.png';
 function Profile() {
   const [userDetails, setUserDetails] = useState(null);
   const [subziItems, setSubziItems] = useState([]);
+  const [avg, setAvg]= useState(null)
 
   const fetchUserData = async () => {
     auth.onAuthStateChanged(async (user) => {
@@ -21,7 +22,6 @@ function Profile() {
       }
     });
   };
-
   const fetchSubziItems = async () => {
     const subziCollection = collection(db, "Subzi");
     const subziSnapshot = await getDocs(subziCollection);
@@ -76,7 +76,7 @@ function Profile() {
             </div>
             <div className="subzi-small-container">
               {subziItems.map((item, index) => (
-                <Tile s={randomDegree()} key={index} imageSrc={item.Image} name={item.Title} onClick={() => handleTileClick(item.Title)} />
+                <Tile s={randomDegree()} key={index} imageSrc={item.Image} name={item.Title} stars={item.Ints} onClick={() => handleTileClick(item.Title)} />
               ))}
             </div>
           </div>
